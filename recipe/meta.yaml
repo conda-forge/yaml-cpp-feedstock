@@ -1,4 +1,6 @@
 {% set version = "0.6.3" %}
+{% set hash = "77ea1b90b3718aa0c324207cb29418f5bced2354c2e483a9523d98c3460af1ed" %}
+{% set build_number = "4" %}
 
 package:
   name: yaml-cpp-split
@@ -6,12 +8,12 @@ package:
 
 source:
   url: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-{{ version }}.tar.gz
-  sha256: 77ea1b90b3718aa0c324207cb29418f5bced2354c2e483a9523d98c3460af1ed
-  patches:
+  sha256: {{ hash }}
+  patches:             # [win]
     - pkgconfig.patch  # [win]
 
 build:
-  number: 4
+  number: {{ build_number }}
 
 outputs:
   - name: yaml-cpp
@@ -35,9 +37,8 @@ outputs:
         - cmake
         - ninja
       commands:
-        - test -f $PREFIX/lib/libyaml-cpp.so  # [not win and not osx]
-        - test -f $PREFIX/lib/libyaml-cpp.dylib  # [osx]
-        - if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1  # [win]
+        - test/test.sh   # [not win]
+        - test/test.bat  # [win]
 
   - name: yaml-cpp-static
     script: build_static.sh  # [not win]
@@ -63,8 +64,8 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec.
-  doc_url: https://github.com/jbeder/yaml-cpp/wiki/Tutorial
   dev_url: https://github.com/jbeder/yaml-cpp
+  doc_url: https://github.com/jbeder/yaml-cpp.wiki.git
 
 extra:
   recipe-maintainers:
