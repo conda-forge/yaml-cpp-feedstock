@@ -1,7 +1,7 @@
 {% set version = "0.6.3" %}
 
 package:
-  name: yaml-cpp
+  name: yaml-cpp-split
   version: {{ version }}
 
 source:
@@ -12,30 +12,33 @@ source:
 
 build:
   number: 4
-  run_exports:
-    - {{ pin_subpackage('yaml-cpp', max_pin='x.x') }}
-
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - cmake
-    - ninja
-
-test:
-  files:
-    - test
-  requires:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - cmake
-    - ninja
-  commands:
-    - test -f $PREFIX/lib/libyaml-cpp.so  # [not win]
-    - if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1  # [win]
 
 outputs:
   - name: yaml-cpp
+    script: build_shared.sh  # [not win]
+    script: bld_shared.bat   # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage('yaml-cpp', max_pin='x.x') }}
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake
+        - ninja
+    test:
+      files:
+        - test
+      requires:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake
+        - ninja
+      commands:
+        - test -f $PREFIX/lib/libyaml-cpp.so  # [not win and not osx]
+        - test -f $PREFIX/lib/libyaml-cpp.dylib  # [osx]
+        - if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1  # [win]
+
   - name: yaml-cpp-static
     script: build_static.sh  # [not win]
     build:
