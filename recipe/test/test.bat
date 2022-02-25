@@ -19,4 +19,7 @@ if errorlevel 1 exit 1
 
 
 :: Perform additional testing.
-if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1
+if not exist %LIBRARY_BIN%\yaml-cpp.dll exit 1
+
+:: Success
+exit 0
