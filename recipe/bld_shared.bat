@@ -18,3 +18,11 @@ if errorlevel 1 exit 1
 :: Build and install.
 ninja install
 if errorlevel 1 exit 1
+
+
+:: Calling author's test is currently disabled. When re-enabled,
+::   please update the note in the `meta.yaml` file.
+::
+:: Call author's tests.
+::test\yaml-cpp-tests
+::if errorlevel 1 exit 1

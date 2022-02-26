@@ -15,3 +15,6 @@ cmake .. -G"Ninja" ${CMAKE_ARGS} \
 
 # Build and install.
 ninja install || exit 1
+
+# Call author's tests.
+test/yaml-cpp-tests || exit 1

@@ -27,6 +27,8 @@ outputs:
         - cmake
         - ninja
     test:
+      # NOTE: author's tests are run from the build sripts in all
+      # non-windows architectures.
       files:
         - test
       requires:
@@ -35,6 +37,13 @@ outputs:
         - cmake
         - ninja
       commands:
+        # These tests ensure the library is in its expected location.
+        - test -f $PREFIX/lib/libyaml-cpp.so              # [not (osx or win)]
+        - test -f $PREFIX/lib/libyaml-cpp.dylib           # [osx]
+        - if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1 # [win]
+        # These tests ensure a simple program can be built using the
+        # library. They are not altogether necessary assuming the
+        # author's tests are run in the build script.
         - test/test.sh   # [not win]
         - test/test.bat  # [win]
 
