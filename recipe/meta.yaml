@@ -27,7 +27,7 @@ outputs:
         - cmake
         - ninja
     test:
-      # NOTE: author's tests are run from the build sripts in all
+      # NOTE: author's tests are run from the build scripts in all
       # non-windows architectures.
       files:
         - test
