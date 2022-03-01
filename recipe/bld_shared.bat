@@ -6,9 +6,8 @@ cd build_shared
 if errorlevel 1 exit 1
 
 :: Generate the build files.
-cmake .. -G"Ninja" %CMAKE_ARGS% ^
-    -DYAML_CPP_BUILD_TESTS=OFF ^
-    -DBUILD_SHARED_LIBS=ON ^
+cmake .. -G"Ninja" ^
+    -DYAML_CPP_BUILD_TESTS=ON ^
     -DYAML_BUILD_SHARED_LIBS=ON ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
@@ -20,9 +19,9 @@ ninja install
 if errorlevel 1 exit 1
 
 
-:: Calling author's test is currently disabled. When re-enabled,
-::   please update the note in the `meta.yaml` file.
-::
 :: Call author's tests.
-::test\yaml-cpp-tests
-::if errorlevel 1 exit 1
+test\yaml-cpp-tests
+if errorlevel 1 exit 1
+
+:: Success!
+exit 0
