@@ -9,9 +9,10 @@ source:
   sha256: 43e6a9fcb146ad871515f0d0873947e5d497a1c9c60c58cb102a97b47208b7c3
   patches:
     - pr_1064.patch
+    - pr_1077.patch
 
 build:
-  number: 1
+  number: 2
   run_exports:
     - {{ pin_subpackage('yaml-cpp', max_pin='x.x') }}
 
