@@ -56,9 +56,8 @@ outputs:
         - cmake --build build-test/ --target test
 
   - name: yaml-cpp-static
-    script: build-static.sh
-    build:
-      skip: true  # [win]
+    script: build-static.sh   # [unix]
+    script: build-static.bat  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
