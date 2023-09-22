@@ -50,8 +50,8 @@ outputs:
         - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
         - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
         # Running a test trying to link to the library
-        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson ${CMAKE_ARGS}  # [unix]
-        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson %CMAKE_ARGS%   # [win]
+        - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}  # [unix]
+        - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%   # [win]
         - cmake --build build-test/
         - cmake --build build-test/ --target test
 
@@ -80,8 +80,8 @@ outputs:
         - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
         - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
         # Running a test trying to link to the library
-        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson ${CMAKE_ARGS}  # [unix]
-        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson %CMAKE_ARGS%   # [win]
+        - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}  # [unix]
+        - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%   # [win]
         - cmake --build build-test/
         - cmake --build build-test/ --target test
 
