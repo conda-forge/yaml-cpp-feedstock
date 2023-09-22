@@ -1,7 +1,7 @@
 {% set version = "0.7.0" %}
 
 package:
-  name: yaml-cpp
+  name: yaml-cpp-split
   version: {{ version }}
 
 source:
@@ -13,8 +13,6 @@ source:
 
 build:
   number: 2
-  run_exports:
-    - {{ pin_subpackage('yaml-cpp', max_pin='x.x') }}
 
 requirements:
   build:
@@ -23,22 +21,32 @@ requirements:
     - cmake
     - ninja
 
-test:
-  files:
-    - test
-  requires:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - cmake
-    - ninja
-  commands:
-    - test -f $PREFIX/lib/libyaml-cpp.so  # [not win]
-    - if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1  # [win]
-
 outputs:
   - name: yaml-cpp
+    script: build-dyn.sh   # [unix]
+    script: build-dyn.bat  # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage('yaml-cpp', max_pin='x.x') }}
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake
+        - ninja
+    test:
+      files:
+        - test/
+      requires:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake
+        - ninja
+      commands:
+        - test -f $PREFIX/lib/libyaml-cpp.so  # [not win]
+        - if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1  # [win]
   - name: yaml-cpp-static
-    script: build_static.sh  # [not win]
+    script: build-static.sh
     build:
       skip: true  # [win]
     requirements:
@@ -47,10 +55,6 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
-      host:
-        - {{ pin_subpackage('yaml-cpp', exact=True) }}
-      run:
-        - {{ pin_subpackage('yaml-cpp', exact=True) }}
     test:
       commands:
         - test -f $PREFIX/lib/libyaml-cpp.a  # [not win]
