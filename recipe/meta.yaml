@@ -43,8 +43,18 @@ outputs:
         - cmake
         - ninja
       commands:
-        - test -f $PREFIX/lib/libyaml-cpp.so  # [not win]
-        - if not exist %LIBRARY_BIN%\\yaml-cpp.dll exit 1  # [win]
+        - test -f "${PREFIX}/lib/libyaml-cpp${SHLIB_EXT}"   # [unix]
+        - if not exist %LIBRARY_BIN%\yaml-cpp.dll (exit 1)  # [win]
+        - if not exist %LIBRARY_LIB%\yaml-cpp.lib (exit 1)  # [win]
+        - test ! -f "${PREFIX}/lib/libyaml-cpp.a"  # [unix]
+        - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
+        - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
+        # Running a test trying to link to the library
+        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson ${CMAKE_ARGS}  # [unix]
+        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson %CMAKE_ARGS%   # [win]
+        - cmake --build build-test/
+        - cmake --build build-test/ --target test
+
   - name: yaml-cpp-static
     script: build-static.sh
     build:
@@ -56,8 +66,25 @@ outputs:
         - cmake
         - ninja
     test:
+      files:
+        - test/
+      requires:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - cmake
+        - ninja
       commands:
-        - test -f $PREFIX/lib/libyaml-cpp.a  # [not win]
+        - test ! -f "${PREFIX}/lib/libyaml-cpp${SHLIB_EXT}"   # [unix]
+        - if exist %LIBRARY_BIN%\yaml-cpp.dll (exit 1)        # [win]
+        - if not exist %LIBRARY_LIB%\yaml-cpp.lib (exit 1)  # [win]
+        - test -f "${PREFIX}/lib/libyaml-cpp.a"             # [unix]
+        - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
+        - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
+        # Running a test trying to link to the library
+        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson ${CMAKE_ARGS}  # [unix]
+        - cmake -G Ninja -S test/ -B build-test/ -D TEST_TARGET=simdjson %CMAKE_ARGS%   # [win]
+        - cmake --build build-test/
+        - cmake --build build-test/ --target test
 
 about:
   home: https://github.com/jbeder/yaml-cpp
