@@ -64,6 +64,8 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
+      run_constrained:
+        - yaml-cpp < 0
     test:
       files:
         - test/
