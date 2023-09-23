@@ -12,7 +12,7 @@ source:
     - fix_empty_cmake_variable.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
