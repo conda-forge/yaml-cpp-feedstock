@@ -1,12 +1,16 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.20)
 
-project(test LANGUAGES CXX)
+project(test-yaml-cpp LANGUAGES CXX)
 
-find_package(yaml-cpp REQUIRED PATHS ${CMAKE_PREFIX_PATH}/lib)
+add_executable(test-yaml-cpp test.cpp)
 
-include_directories(${CMAKE_PREFIX_PATH}/include)
-link_directories(${CMAKE_PREFIX_PATH}/lib)
+find_package(yaml-cpp REQUIRED)
+target_link_libraries(test-yaml-cpp PRIVATE yaml-cpp)
 
-add_executable(test main.cpp)
+get_target_property(YAML_TYPE yaml-cpp TYPE)
+if(YAML_TYPE STREQUAL "STATIC_LIBRARY")
+    target_compile_definitions(test-yaml-cpp PRIVATE YAML_CPP_STATIC_DEFINE)
+endif()
 
-target_link_libraries(test PUBLIC yaml-cpp)
+enable_testing()
+add_test(NAME test-yaml-cpp COMMAND test-yaml-cpp)
