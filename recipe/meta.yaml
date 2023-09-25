@@ -44,8 +44,8 @@ outputs:
         - if not exist %LIBRARY_BIN%\yaml-cpp.dll (exit 1)  # [win]
         - if not exist %LIBRARY_LIB%\yaml-cpp.lib (exit 1)  # [win]
         - test ! -f "${PREFIX}/lib/libyaml-cpp.a"  # [unix]
-        - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
-        - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
+        - test -f "${PREFIX}/lib/cmake/yaml-cpp/yaml-cpp-config.cmake"              # [unix]
+        - if not exist %LIBRARY_LIB%\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
         # Running a test trying to link to the library
         - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}  # [unix]
         - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%   # [win]
@@ -76,8 +76,8 @@ outputs:
         - if exist %LIBRARY_BIN%\yaml-cpp.dll (exit 1)        # [win]
         - if not exist %LIBRARY_LIB%\yaml-cpp.lib (exit 1)  # [win]
         - test -f "${PREFIX}/lib/libyaml-cpp.a"             # [unix]
-        - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
-        - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
+        - test -f "${PREFIX}/lib/cmake/yaml-cpp/yaml-cpp-config.cmake"              # [unix]
+        - if not exist %LIBRARY_LIB%\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
         # Running a test trying to link to the library
         - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}  # [unix]
         - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%   # [win]
