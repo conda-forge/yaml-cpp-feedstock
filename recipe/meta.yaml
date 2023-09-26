@@ -1,18 +1,15 @@
-{% set version = "0.7.0" %}
+{% set version = "0.8.0" %}
 
 package:
   name: yaml-cpp-split
   version: {{ version }}
 
 source:
-  url: https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-{{ version }}.tar.gz
-  sha256: 43e6a9fcb146ad871515f0d0873947e5d497a1c9c60c58cb102a97b47208b7c3
-  patches:
-    - pr_1064.patch
-    - fix_empty_cmake_variable.patch
+  url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/{{ version }}.tar.gz
+  sha256: fbe74bbdcee21d656715688706da3c8becfd946d92cd44705cc6098bb23b3a16
 
 build:
-  number: 3
+  number: 0
 
 requirements:
   build:
@@ -47,8 +44,8 @@ outputs:
         - if not exist %LIBRARY_BIN%\yaml-cpp.dll (exit 1)  # [win]
         - if not exist %LIBRARY_LIB%\yaml-cpp.lib (exit 1)  # [win]
         - test ! -f "${PREFIX}/lib/libyaml-cpp.a"  # [unix]
-        - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
-        - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
+        - test -f "${PREFIX}/lib/cmake/yaml-cpp/yaml-cpp-config.cmake"              # [unix]
+        - if not exist %LIBRARY_LIB%\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
         # Running a test trying to link to the library
         - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}  # [unix]
         - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%   # [win]
@@ -79,8 +76,8 @@ outputs:
         - if exist %LIBRARY_BIN%\yaml-cpp.dll (exit 1)        # [win]
         - if not exist %LIBRARY_LIB%\yaml-cpp.lib (exit 1)  # [win]
         - test -f "${PREFIX}/lib/libyaml-cpp.a"             # [unix]
-        - test -f "${PREFIX}/share/cmake/yaml-cpp/yaml-cpp-config.cmake"                     # [unix]
-        - if not exist %PREFIX%\Library\share\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
+        - test -f "${PREFIX}/lib/cmake/yaml-cpp/yaml-cpp-config.cmake"              # [unix]
+        - if not exist %LIBRARY_LIB%\cmake\yaml-cpp\yaml-cpp-config.cmake (exit 1)  # [win]
         # Running a test trying to link to the library
         - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}  # [unix]
         - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%   # [win]
