@@ -20,8 +20,8 @@ requirements:
 
 outputs:
   - name: yaml-cpp
-    script: build-dyn.sh   # [unix]
-    script: build-dyn.bat  # [win]
+    script: build-lib.sh   # [unix]
+    script: build-lib.bat  # [win]
     build:
       run_exports:
         - {{ pin_subpackage('yaml-cpp', max_pin='x.x') }}
@@ -53,8 +53,8 @@ outputs:
         - cmake --build build-test/ --target test
 
   - name: yaml-cpp-static
-    script: build-static.sh   # [unix]
-    script: build-static.bat  # [win]
+    script: build-lib.sh   # [unix]
+    script: build-lib.bat  # [win]
     requirements:
       build:
         - {{ compiler('c') }}
