@@ -1,5 +1,5 @@
-About yaml-cpp-split-feedstock
-==============================
+About yaml-cpp-feedstock
+========================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/yaml-cpp-feedstock/blob/main/LICENSE.txt)
 
@@ -17,14 +17,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://app.travis-ci.com/conda-forge/yaml-cpp-feedstock">
-        <img alt="linux" src="https://img.shields.io/travis/com/conda-forge/yaml-cpp-feedstock/main.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -79,6 +72,13 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/yaml-cpp-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
                 </a>
               </td>
+            </tr><tr>
+              <td>win_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=6294&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/yaml-cpp-feedstock?branchName=main&jobName=win&configuration=win%20win_arm64_" alt="variant">
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -95,10 +95,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-yaml--cpp-green.svg)](https://anaconda.org/conda-forge/yaml-cpp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/yaml-cpp.svg)](https://anaconda.org/conda-forge/yaml-cpp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/yaml-cpp.svg)](https://anaconda.org/conda-forge/yaml-cpp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/yaml-cpp.svg)](https://anaconda.org/conda-forge/yaml-cpp) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-yaml--cpp--static-green.svg)](https://anaconda.org/conda-forge/yaml-cpp-static) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/yaml-cpp-static.svg)](https://anaconda.org/conda-forge/yaml-cpp-static) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/yaml-cpp-static.svg)](https://anaconda.org/conda-forge/yaml-cpp-static) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/yaml-cpp-static.svg)](https://anaconda.org/conda-forge/yaml-cpp-static) |
 
-Installing yaml-cpp-split
-=========================
+Installing yaml-cpp
+===================
 
-Installing `yaml-cpp-split` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `yaml-cpp` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -161,7 +161,7 @@ available continuous integration services. Thanks to the awesome service provide
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
 [Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
 it is possible to build and upload installable packages to the
-[conda-forge](https://anaconda.org/conda-forge) [Anaconda-Cloud](https://anaconda.org/)
+[conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
 
 To manage the continuous integration and simplify feedstock maintenance
@@ -184,17 +184,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating yaml-cpp-split-feedstock
-=================================
+Updating yaml-cpp-feedstock
+===========================
 
-If you would like to improve the yaml-cpp-split recipe or build a new
+If you would like to improve the yaml-cpp recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/yaml-cpp-split-feedstock are
+Note that all branches in the conda-forge/yaml-cpp-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
