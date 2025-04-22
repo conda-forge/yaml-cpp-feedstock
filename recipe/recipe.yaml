@@ -37,10 +37,10 @@ outputs:
       - script:
           - if: unix
             then:
-              - test ! -f "${PREFIX}/lib/libyaml-cpp.a"  # [unix]
-              - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}  # [unix]
+              - test ! -f "${PREFIX}/lib/libyaml-cpp.a"
+              - cmake -G Ninja -S test/ -B build-test/ ${CMAKE_ARGS}
             else:
-              - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%   # [win]
+              - cmake -G Ninja -S test/ -B build-test/ %CMAKE_ARGS%
           - cmake --build build-test/
           - cmake --build build-test/ --target test
         requirements:
